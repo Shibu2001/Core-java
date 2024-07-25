@@ -1,0 +1,104 @@
+package com.jsp.view;
+
+import java.util.Scanner;
+import com.jsp.controller.StudentController;
+import com.jsp.model.Student;
+
+public class StudentView {
+    static Scanner sc=new Scanner(System.in);
+    static StudentController controller=new StudentController();
+
+    public static Student getStudentObject() {
+        System.out.println("enter student id");
+        int id=sc.nextInt();
+        System.out.println("enter student name");
+        sc.nextLine();//dummy input
+        String name=sc.nextLine();
+        System.out.println("enter student email");
+        String email=sc.nextLine();
+        System.out.println("enter student password");
+        String password=sc.nextLine();
+        System.out.println("enter student dob");
+        String dob=sc.nextLine();
+        System.out.println("enter student address");
+        String address=sc.nextLine();
+        System.out.println("enter student gender");
+        String gender=sc.nextLine();
+        System.out.println("enter student mobile no");
+        long mobile=sc.nextLong();
+        System.out.println("enter student relationship status");
+        sc.nextLine();
+        String relationship=sc.nextLine();
+
+        //create student object
+        Student s=new Student();
+        s.setName(name);
+        s.setId(id);
+        s.setEmail(email);
+        s.setMob(mobile);
+        s.setAddress(address);
+        s.setDob(dob);
+        s.setGender(gender);
+        s.setPassword(password);
+        s.setRelationshipStatus(relationship);
+
+        return s;
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println("WELCOME TO SMS APP");
+        while(true)
+        {
+            System.out.println("Enter yout choice:");
+            System.out.println("1.save student");
+            System.out.println("2.find student by id");
+            System.out.println("3.update student by id");
+            System.out.println("4.delete student by id");
+            System.out.println("5.find all");
+            System.out.println("6.exit");
+
+            int choice=sc.nextInt();
+            switch(choice) {
+                case 1:
+
+                    Student s=getStudentObject();//create student object and return
+                    System.out.println(s);
+                    controller.saveStudent(s);
+                    break;
+                case 2:
+
+                //take student id
+                    System.out.println("Enter student id");
+                    int stdId=sc.nextInt();
+                    controller.findStudentById(stdId);
+                    break;
+                case 3:
+
+                    System.out.println("Enter student id");
+                    int stuId2=sc.nextInt();
+                    System.out.println("enter new relationshi");
+                    sc.nextLine();
+                    String newRelationship = sc.nextLine();
+                    controller.updateStudentbyId(stuId2,newRelationship);
+                    break;
+                case 4:
+                    System.out.println("Enter student Id");
+                    int stuId3= sc.nextInt();
+                    controller.deleteById(stuId3);
+                    break;
+                case 5:
+                    controller.findAll();
+                    break;
+                case 6:
+                    System.out.println("thank you...");
+                    return;
+                default:
+                    System.out.println("invalid choice...");
+                    break;
+            }
+
+        }
+
+    }
+}
