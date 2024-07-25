@@ -1,0 +1,66 @@
+package com.jsp.controller;
+
+import java.util.ArrayList;
+
+import com.jsp.model.Student;
+
+public class StudentController {
+    ///create ArrayList
+    ArrayList<Student> listOfStudent=new ArrayList<Student>();
+
+    public void saveStudent(Student student) {
+        listOfStudent.add(student);
+        System.out.println("student saved");
+
+    }
+    public Student findStudentById(int stdId)
+    {
+        for(Student s:listOfStudent) {
+            if(s.getId()==stdId) {
+                System.out.println(s);
+                return s;
+            }
+            System.out.println("record not found");//traverse complete
+        }
+        return null;
+    }
+
+
+    public void updateStudentbyId(int stuId2, String newRelationship)
+    {
+        for (Student s: listOfStudent)
+        {
+            if (s.getId()==stuId2)
+            {
+                s.setRelationshipStatus(newRelationship);
+                System.out.println(s);
+                return;
+            }
+        }
+        System.out.println("Record not found");
+    }
+
+    public void deleteById(int stuId3)
+    {
+       //fetch...
+       Student s = findStudentById(stuId3);
+
+       if (s != null)
+       {
+           boolean b = listOfStudent.remove(s);
+           if (b==true)
+           {
+               System.out.println("Record deleted ..");
+               return;
+           }
+       }
+        System.out.println("Record not found");
+
+    }
+
+    public void findAll()
+    {
+        for (Student s : listOfStudent)
+            System.out.println(s);
+    }
+}
